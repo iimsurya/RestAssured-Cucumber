@@ -15,11 +15,8 @@ import pojo.AddPlace;
 import pojo.AddPlace_Location;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertEquals;
 
@@ -46,7 +43,7 @@ public class AddPlaceStepDef {
     }
 
     @When("User hits {string} api using POST http method")
-    public static void user_hits_api_using_post_http_method(String resource) throws IOException {
+    public static void user_hits_api_using_post_http_method(String resource)  {
 
         APIResources resources = APIResources.valueOf(resource);
         AddPlace addPlace = new AddPlace();
