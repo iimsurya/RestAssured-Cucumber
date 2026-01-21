@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import contracts.APIResources;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
@@ -10,6 +11,8 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
+import pojo.AddPlace;
+import pojo.AddPlace_Location;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -42,12 +45,25 @@ public class AddPlaceStepDef {
                 .build();
     }
 
-    @When("User hits add place api using POST http method")
-    public static void user_hits_add_place_api_using_post_http_method() throws IOException {
+    @When("User hits {string} api using POST http method")
+    public static void user_hits_api_using_post_http_method(String resource) throws IOException {
 
+        APIResources resources = APIResources.valueOf(resource);
+        AddPlace addPlace = new AddPlace();
+        addPlace.setAccuracy(50);
+        addPlace.setName("Google Head Office");
+        addPlace.setPhone_number("9890989098");
+        addPlace.setAddress("13, Silicon Valley");
+        addPlace.setTypes(new String[]{"Tech", "Silicon"});
+        addPlace.setWebsite("http://google.com");
+        addPlace.setLanguage("English_India");
+        AddPlace_Location addPlaceLocation = new AddPlace_Location();
+        addPlaceLocation.setLat("-38.383494");
+        addPlaceLocation.setLng("39.383494");
+        addPlace.setLocation(addPlaceLocation);
          response = given().spec(reqSpecBuilder)
-                .body(new String(Files.readAllBytes(Paths.get("/Users/suryav/IdeaProjects/AutomationPhase2-RestAssured/src/test/java/Data/addPlace.json"))))
-                .when().post("/maps/api/place/add/json")
+                .body(addPlace)
+                .when().post(resources.getResource())
                 .then().spec(resSpecBuilder).extract().response();
 
     }
@@ -58,8 +74,8 @@ public class AddPlaceStepDef {
         assertEquals(responseStatusCode,statusCode);
 
     }
-    @Then("User should get {string} equal to {string} in respose")
-    public void user_should_get_equal_to_in_respose(String key, String value) {
+    @Then("User should get {string} equal to {string} in response")
+    public void user_should_get_equal_to_in_response(String key, String value) {
 
         String responseString = response.asString();
 
