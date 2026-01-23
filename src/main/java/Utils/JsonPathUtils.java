@@ -5,9 +5,9 @@ import io.restassured.response.Response;
 
 public class JsonPathUtils {
 
-    public static String getJsonPathValue(Response response, String key){
+    public static String getJsonPathValue(String response, String key){
 
-        JsonPath js = new JsonPath(response.toString());
+        JsonPath js = new JsonPath(response);
         return js.get(key).toString();
 
     }

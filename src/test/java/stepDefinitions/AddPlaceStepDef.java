@@ -99,7 +99,7 @@ public class AddPlaceStepDef {
         System.out.println(responseAddPlace.getPlace_id());
         System.out.println(key);
 
-        String actualValue = JsonPathUtils.getJsonPathValue(response,key);
+        String actualValue = JsonPathUtils.getJsonPathValue(responseString,key);
         System.out.println(actualValue);
         assertEquals(actualValue,value);
 
