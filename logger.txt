@@ -27,8 +27,9 @@ Body:
     "language": "English_India"
 }
 HTTP/1.1 200 OK
-Date: Fri, 23 Jan 2026 15:24:34 GMT
+Date: Fri, 22 May 2026 17:39:24 GMT
 Server: Apache/2.4.52 (Ubuntu)
+Strict-Transport-Security: max-age=604800; includeSubDomains
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: POST
 Access-Control-Max-Age: 3600
@@ -40,8 +41,8 @@ Content-Type: application/json;charset=UTF-8
 
 {
     "status": "OK",
-    "place_id": "96ad7d07c45abb7f2cf32708fc4c9328",
+    "place_id": "e961efaf0ee254eb09938973767b6c05",
     "scope": "APP",
-    "reference": "a4271ec7b709d9c77964508d7defc12ca4271ec7b709d9c77964508d7defc12c",
-    "id": "a4271ec7b709d9c77964508d7defc12c"
+    "reference": "933c102f0805d034989d248bd385ba64933c102f0805d034989d248bd385ba64",
+    "id": "933c102f0805d034989d248bd385ba64"
 }

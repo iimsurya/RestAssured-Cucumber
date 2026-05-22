@@ -17,3 +17,13 @@ public enum APIResources {
          return resource;
     }
 }
+
+/*
+ * APIResources
+ * -------------
+ * Enum used to centralize API endpoint paths used by the tests. Use
+ * APIResources.valueOf("addPlaceResource").getResource() to obtain the
+ * resource path for a request. Centralizing endpoints here reduces
+ * duplication and makes it easier to update paths when the API changes.
+ */
+

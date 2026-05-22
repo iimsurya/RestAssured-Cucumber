@@ -11,6 +11,13 @@ public class AddPlace {
     private String website;
     private String language;
 
+    /**
+     * POJO representing the Add Place request payload.
+     * This class maps directly to the JSON sent to the Add Place API.
+     * Fields are populated in `AddPlaceStepDef.getAddPlace()` before the
+     * request is executed.
+     */
+
     public AddPlace_Location getLocation() {
         return location;
     }

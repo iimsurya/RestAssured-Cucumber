@@ -8,6 +8,11 @@ public class ResponseAddPlace {
     private String reference;
     private String id;
 
+    /**
+     * POJO used to deserialize the successful Add Place response.
+     * Typical response contains status, place_id and scope among other fields.
+     */
+
     public String getStatus() {
         return status;
     }

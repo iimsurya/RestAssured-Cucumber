@@ -5,6 +5,10 @@ public class AddPlace_Location {
     private String lat;
     private String lng;
 
+    /**
+     * Simple POJO for location latitude/longitude used inside `AddPlace`.
+     */
+
     public String getLat() {
         return lat;
     }

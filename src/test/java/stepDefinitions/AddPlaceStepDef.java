@@ -9,7 +9,6 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
@@ -31,24 +30,40 @@ public class AddPlaceStepDef {
     public static RequestSpecification request;
     public static Response response;
 
+    /**
+     * Step definitions for the Add Place API feature.
+     *
+     * This class builds the request and response specifications, creates the
+     * request payload (POJO), invokes the API and validates the response.
+     *
+     * Notes:
+     * - Request and response HTTP traffic is logged to `logger.txt` (see
+     *   RequestLoggingFilter/ResponseLoggingFilter usage below).
+     */
+
     @Given("User have valid request URI and Contract")
     public static void user_have_valid_request_uri_and_contract() throws FileNotFoundException {
 
+        // create a log file to capture raw HTTP requests and responses
         PrintStream stream = new PrintStream(new FileOutputStream("logger.txt"));
 
+        // Build a reusable request specification. This captures base URI,
+        // headers, query parameters and logging filters so subsequent requests
+        // can reuse the same configuration.
         reqSpecBuilder = new RequestSpecBuilder().setBaseUri("https://rahulshettyacademy.com")
                 .addHeader("Content-Type", "application/json")
                 .addFilter(RequestLoggingFilter.logRequestTo(stream))
                 .addFilter(ResponseLoggingFilter.logResponseTo(stream))
                 .addQueryParam("key", "qaclick123").build();
 
+        // Build a response specification that asserts common expectations
+        // for successful responses from this endpoint.
         resSpecBuilder = new ResponseSpecBuilder().expectStatusCode(200)
                 .expectBody("scope",equalTo("APP"))
                 .build();
 
-
+        // Create the request payload using POJOs and attach it to the request
         AddPlace addPlace = getAddPlace();
-
         request = given().spec(reqSpecBuilder).body(addPlace);
 
 
@@ -56,6 +71,8 @@ public class AddPlaceStepDef {
     }
 
     private static AddPlace getAddPlace() {
+        // Helper that creates and populates the AddPlace POJO used as the
+        // request body. Modify values here to change the test data.
         AddPlace addPlace = new AddPlace();
         addPlace.setAccuracy(50);
         addPlace.setName("Google Head Office");
@@ -74,6 +91,7 @@ public class AddPlaceStepDef {
     @When("User hits {string} api using {string} http method")
     public static void user_hits_api_using_http_method(String resource, String method)  {
 
+        // Resolve the endpoint path from the enum and perform the request
         APIResources resources = APIResources.valueOf(resource);
 
         if(method.equalsIgnoreCase("POST")) {

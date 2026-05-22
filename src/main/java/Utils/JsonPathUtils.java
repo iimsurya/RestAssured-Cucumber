@@ -1,7 +1,6 @@
 package Utils;
 
 import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
 
 public class JsonPathUtils {
 
@@ -14,3 +13,12 @@ public class JsonPathUtils {
 
 
 }
+
+/*
+ * JsonPathUtils
+ * -------------
+ * Tiny helper utility that extracts a value from a JSON string using
+ * RestAssured's JsonPath. It returns the object's toString(); callers
+ * should ensure the key exists to avoid NullPointerException.
+ */
+
